@@ -13,8 +13,7 @@ class Login extends Component {
             password: ''
         };
 
-        this._handleEmailChange = this._handleEmailChange.bind(this);
-        this._handlePasswordChange = this._handlePasswordChange.bind(this);
+        this._handleTextChange = this._handleTextChange.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
     }
 
@@ -23,15 +22,9 @@ class Login extends Component {
         this.props.dispatch(loginSubmit(this.state.email, this.state.password));
     }
 
-    _handleEmailChange(e) {
+    _handleTextChange(e) {
         this.setState({
-            email: e.target.value
-        })
-    }
-
-    _handlePasswordChange(e) {
-        this.setState({
-            password: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -54,10 +47,11 @@ class Login extends Component {
                         <FormTextField 
                             type="email" 
                             value={this.state.email}
+                            name="email" 
                             className="form-control" 
                             id="email" 
                             placeholder="Enter email" 
-                            handleChange={this._handleEmailChange} 
+                            handleChange={this._handleTextChange} 
                             />
                     </div>
                     </div>
@@ -67,10 +61,11 @@ class Login extends Component {
                         <FormTextField 
                             type="password" 
                             value={this.state.password}
+                            name="password" 
                             className="form-control" 
                             id="password" 
                             placeholder="Enter password" 
-                            handleChange={this._handlePasswordChange} 
+                            handleChange={this._handleTextChange} 
                             />
                     </div>
                     </div>
