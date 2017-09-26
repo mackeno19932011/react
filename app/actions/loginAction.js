@@ -5,4 +5,10 @@ export default function loginSubmit(email, password) {
         email: email,
         password: password
     }
+};
+
+export function logout() {
+    return {
+        type: 'LOGOUT'
+    }
 }

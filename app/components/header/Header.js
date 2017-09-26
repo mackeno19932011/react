@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { logout } from './../../actions/loginAction';
+
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+
+        this._handleLogout = this._handleLogout.bind(this);
+    }
+
+    _handleLogout() {
+        this.props.dispatch(logout());
+    }
+
     render() {
+        const authetication = this.props.auth
+                ?<Link to="/login"><button className="btn btn-danger navbar-btn">Login</button></Link>
+                :<button className="btn btn-danger navbar-btn" onClick={this._handleLogout}>Logout</button>;
+
         return (
             <nav className="navbar navbar-inverse">
                 <div className="container-fluid">
@@ -14,11 +31,17 @@ class Header extends Component {
                     <li><Link to="/products">Product</Link></li>
                     <li><a href="#"></a></li>
                 </ul>
-                <Link to="/login"><button className="btn btn-danger navbar-btn">Login</button></Link>
+                {authetication}
                 </div>
             </nav>
         )
     }
 }
 
-export default Header;
+function mapStateToProp(state) {
+    return {
+        auth: state.login
+    }
+}
+
+export default connect(mapStateToProp, null)(Header);
