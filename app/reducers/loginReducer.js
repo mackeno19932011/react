@@ -1,35 +1,22 @@
-import _ from 'underscore';
+const initialState = {
+    email: '',
+    password: '',
+    authenticate: false,
+};
 
-function submit(email, password) {
-	if (email==='duykhanh19932011@gmail.com' && password==='12345') {
-		return true;
-	}
-
-	return false;
-}
-
-export default function loginReducer(state=[], action) {
-    var nextState = _.clone(state);
-
+export default function loginReducer(state = initialState, action) {
     switch (action.type) {
-        case 'LOGIN_SUBMIT':
-            if (submit(action.email, action.password)) {
-                return {
-                    authenticate: true
-                };
-            } else {
-                return {
-                    authenticate: false
-                }
-            }
-                
-        case 'LOGOUT':
+        case 'UPDATE_USER_INFO':
             return {
-                authenticate: false
+                email: action.email,
+                password: action.password,
+                authenticate: true,
             };
+        case 'UPDATE_LOGOUT_USER_INFO':
+            return Object.assign({}, initialState, {authenticate: false});
         default:
             return state;
-    }
+    };
 
-    return nextState;
-}
+    return state;
+};

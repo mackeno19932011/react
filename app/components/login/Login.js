@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import loginSubmit from './../../actions/loginAction';
-
 import FormTextField from './../generals/FormTextField';
+import { loginSubmit }   from './../../actions/loginAction';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
         };
 
         this._handleTextChange = this._handleTextChange.bind(this);
@@ -19,7 +18,7 @@ class Login extends Component {
 
     _handleSubmit(e) {
         e.preventDefault();
-        this.props.dispatch(loginSubmit(this.state.email, this.state.password));
+        this.props.loginSubmit(this.state.email, this.state.password);
     }
 
     _handleTextChange(e) {
@@ -91,10 +90,14 @@ class Login extends Component {
     }
 }
 
-function mapStateToProp(state) {
+const mapStateToProps = (state) => {
     return {
-        auth: state.login
+        auth: state.login,
     }
-}
+};
 
-export default connect(mapStateToProp, null)(Login);
+const mapDispatchToProps = (dispatch) =>  ({
+        loginSubmit,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

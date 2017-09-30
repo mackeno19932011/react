@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logout } from './../../actions/loginAction';
+import { logoutSubmit } from './../../actions/loginAction';
 
 
 class Header extends Component {
@@ -12,7 +12,7 @@ class Header extends Component {
     }
 
     _handleLogout() {
-        this.props.dispatch(logout());
+        this.props.logoutSubmit(this.props.dispatch);
     }
 
     render() {
@@ -38,10 +38,14 @@ class Header extends Component {
     }
 }
 
-function mapStateToProp(state) {
+const mapStateToProps = (state) => {
     return {
         auth: state.login
     }
-}
+};
 
-export default connect(mapStateToProp, null)(Header);
+const mapDispatchToProps = {
+    logoutSubmit,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
