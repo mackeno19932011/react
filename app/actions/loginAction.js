@@ -8,7 +8,7 @@ function updateUserInfo(email, password) {
     }
 };
 
-export function loginSubmit(dispatch, email, password) {
+export function loginSubmit({email, password}, dispatch) {
     if (email==='duykhanh19932011@gmail.com' && password==='12345') {
         dispatch(updateUserInfo(email, password));
     }

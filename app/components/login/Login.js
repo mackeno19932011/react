@@ -18,7 +18,8 @@ class Login extends Component {
 
     _handleSubmit(e) {
         e.preventDefault();
-        this.props.loginSubmit(this.state.email, this.state.password);
+        debugger;
+        this.props.loginSubmit({ email: this.state.email, password: this.state.password });
     }
 
     _handleTextChange(e) {
@@ -41,29 +42,25 @@ class Login extends Component {
                                 <div className="form-group">
                                     <label className="control-label col-sm-2" htmlFor="email">Email:</label>
                                 <div className="col-sm-10">
-                                    <FormTextField 
-                                        type="email" 
-                                        value={this.state.email}
-                                        name="email" 
-                                        className="form-control" 
-                                        id="email" 
-                                        placeholder="Enter email" 
-                                        handleChange={this._handleTextChange} 
-                                        />
+                                    <input 
+                                      type="email" 
+                                      name="email" 
+                                      className="form-control" 
+                                      id="email" 
+                                      placeholder="Enter email" 
+                                      value={this.state.email} />
                                 </div>
                                 </div>
                                 <div className="form-group">
                                 <label className="control-label col-sm-2" htmlFor="pwd">Password:</label>
                                 <div className="col-sm-10"> 
-                                    <FormTextField 
-                                        type="password" 
-                                        value={this.state.password}
-                                        name="password" 
-                                        className="form-control" 
-                                        id="password" 
-                                        placeholder="Enter password" 
-                                        handleChange={this._handleTextChange} 
-                                        />
+                                    <input 
+                                      type="password" 
+                                      name="password" 
+                                      className="form-control" 
+                                      id="password" 
+                                      placeholder="Enter password" 
+                                      value={this.state.password} />
                                 </div>
                                 </div>
                                 <div className="form-group"> 
@@ -97,7 +94,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) =>  ({
-        loginSubmit: loginSubmit(dispatch),
+        loginSubmit: (data) => { debugger; loginSubmit(data, dispatch) },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
