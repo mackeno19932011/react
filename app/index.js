@@ -12,15 +12,25 @@ import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
-        <Router history={hashHistory}>
-            <Route path="/" component={App}>
-                <IndexRoute component={Home} />
-                <Route path="/login" component={Login}></Route>
-                <Route path="/products" component={Product}></Route>
-            </Route>
-        </Router>
-    </Provider>
-    , document.getElementById("app")
-);
+const render = (RootApp = App) => {
+    ReactDOM.render(
+        <Provider store={createStoreWithMiddleware(reducers)}>
+            <Router history={hashHistory}>
+                <Route path="/" component={RootApp}>
+                    <IndexRoute component={Home} />
+                    <Route path="/login" component={Login}></Route>
+                    <Route path="/products" component={Product}></Route>
+                </Route>
+            </Router>
+        </Provider>
+        , document.getElementById("app")
+    );
+}
+
+render();
+
+if (module.hot) {
+    module.hot.eccept('./app/index.js', () => {
+        render(require('./components/App').default);
+    });
+}
